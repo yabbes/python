@@ -15,8 +15,14 @@ def main():
     print("Opening current league table matchday {0}".format(table_obj['matchday']))
     # pprint(data)
     for team in table_obj['standing']:
-        print('{0}) {1} {2} Pkt {3} Tore'.format(team['position'], team['teamName'],
-        team['points'], team['goals']))
+        ##print(len(team['teamName']))
+        if len(team['teamName']) <= 14:
+            print('{0})\t {1}\t\t\t {2} Pkt\t {3} Tore'.format(team['position'], team['teamName'],
+            team['points'], team['goals']))
+        else:
+            print('{0})\t {1}\t\t {2} Pkt\t {3} Tore'.format(team['position'], team['teamName'],
+            team['points'], team['goals']))
+
 
 if __name__ == '__main__':
     main()
