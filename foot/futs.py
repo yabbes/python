@@ -37,7 +37,7 @@ def main():
     table = urllib.request.urlopen(select)
     table_str = table.read().decode('utf-8')
     table_obj = json.loads(table_str)
-    print("Opening current league table matchday {0}".format(table_obj['matchday']))
+    print("Aktueller Tabellenstand wird geöffnet; Spieltag {0}".format(table_obj['matchday']))
     for team in table_obj['standing']:
         ##print(len(team['teamName']))
         if len(team['teamName']) <= 14:
