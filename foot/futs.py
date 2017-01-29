@@ -49,6 +49,9 @@ def main():
         if len(team['teamName']) <= 14:
             print('{0})\t {1}\t\t\t {2} Pkt\t {3} Tore'.format(team['position'], team['teamName'],
             team['points'], team['goals']))
+        elif len(team['teamName']) >= 23:
+            print('{0})\t {1}\t {2} Pkt\t {3} Tore'.format(team['position'], team['teamName'],
+            team['points'], team['goals']))
         else:
             print('{0})\t {1}\t\t {2} Pkt\t {3} Tore'.format(team['position'], team['teamName'],
             team['points'], team['goals']))
