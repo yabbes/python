@@ -12,12 +12,6 @@ it_source = 'http://api.football-data.org/v1/soccerseasons/438/leagueTable'
 es_source = 'http://api.football-data.org/v1/soccerseasons/436/leagueTable'
 fr_source = 'http://api.football-data.org/v1/soccerseasons/434/leagueTable'
 
-
-
-
-
-
-
 def main():
 
     print('Willkommen bei Futs dem Fußball-Tsentrum\n')
@@ -47,14 +41,14 @@ def main():
     for team in table_obj['standing']:
         ##print(len(team['teamName']))
         if len(team['teamName']) <= 14:
-            print('{0})\t {1}\t\t\t {2} Pkt\t {3} Tore'.format(team['position'], team['teamName'],
-            team['points'], team['goals']))
+            print('{0})\t {1}\t\t\t {2} Sp\t {3} Pkt\t {4} Tore'.format(team['position'], team['teamName'],
+            team['playedGames'], team['points'], team['goals']))
         elif len(team['teamName']) >= 23:
-            print('{0})\t {1}\t {2} Pkt\t {3} Tore'.format(team['position'], team['teamName'],
-            team['points'], team['goals']))
+            print('{0})\t {1}\t {2} Sp\t {3} Pkt\t {4} Tore'.format(team['position'], team['teamName'],
+            team['playedGames'], team['points'], team['goals']))
         else:
-            print('{0})\t {1}\t\t {2} Pkt\t {3} Tore'.format(team['position'], team['teamName'],
-            team['points'], team['goals']))
+            print('{0})\t {1}\t\t {2} Sp\t {3} Pkt\t {4} Tore'.format(team['position'], team['teamName'],
+            team['playedGames'], team['points'], team['goals']))
 
 
 if __name__ == '__main__':
