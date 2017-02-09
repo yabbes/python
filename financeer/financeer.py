@@ -17,7 +17,7 @@ class Financeer:
         if userInput.startswith('.name'):
             self.name()
         if userInput.startswith('.temp'):
-            self.temp()
+            self.temporary()
         if userInput.startswith('.balance'):
             self.balance()
         if userInput.startswith('.count'):
@@ -37,7 +37,7 @@ class Financeer:
         print('Currently analysing account: {0}\n'.format(self.accountName))
     def balance(self):
         print('Current bank account balance {0}\n'.format(self.accountBalance))
-    def temp(self):
+    def temporary(self):
         print('Currently handling {0} € of temporary monies \n'.format(self.temp))
         print('if you were to save it to your bank account, this would make {0}'.format(self.newAccountBalance))
     def count(self):
