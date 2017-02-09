@@ -15,10 +15,8 @@ class Botzentrum:
 
     def connect(self):
         irc.connect((self.server, 6667))
-        botnick = self.nick
-        #irc.send("/join ##tobbowobbo" +"\n")
-        irc.send(bytes("USER "+ "yabbot" +" "+ botnick +" "+ botnick + " " + botnick + "\n", "UTF-8"))
-        irc.send(bytes('NICK yabbot\n', "UTF-8"))
+        irc.send(bytes("USER " + self.nick + " " + self.nick + " " + self.nick + " " + self.nick + "\n", "UTF-8"))
+        irc.send(bytes('NICK ' + self.nick + '\n', "UTF-8"))
         irc.send(bytes('JOIN ' + self.channel + '\n', "UTF-8"))
     def sendmsg(self, msg):
         irc.send(bytes("PRIVMSG "+ self.channel +" :"+ msg +"\n", "UTF-8"))
@@ -46,6 +44,8 @@ def main():
            if message.find('partir ' + bot.nick) != -1:
                bot.sendmsg('dac je pars')
                bot.quit()
+           if message.find('Alors ' + bot.nick) != -1:
+               bot.sendmsg('Tu veux que je raconte quoi ?')
 
            #bot.sendmsg('Hallo')
 
