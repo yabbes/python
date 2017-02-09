@@ -25,6 +25,10 @@ class Financeer:
             self.count()
         if self.userInput.startswith('.add'):
             self.add()
+        if self.userInput.startswith('.save'):
+            self.saveTemporaryToBank()
+        if self.userInput.startswith('.set'):
+            self.saveFixedBalanceToBank()
         if self.userInput.startswith('.quit'):
             self.quit()
 
@@ -36,6 +40,8 @@ class Financeer:
         '.name \t\t show names of connected bank accounts\n'
         '.count \t\t show transaction count for bank accounts\n'
         '.add \t\t add money to _temporary money_\n'
+        '.save \t\t save money to bank database in .json file\n'
+        '.set \t\t {amount} : set {amount} as new account balance\n'
         '.quit \t\t quit Financeer(r) \n')
     def name(self):
         print('Currently analysing account: {0}\n'.format(self.accountName))
@@ -60,6 +66,20 @@ class Financeer:
         print('if you were to save it to your bank account, this would make {0}'.format(self.getNewAccountBalance()))
     def count(self):
         print('Currently counting {0} transactions on this bank account \n'.format(self.transactionCount))
+    def saveTemporaryToBank(self):
+        n_balance = self.getNewAccountBalance()
+        self.b.setAccountBalance(n_balance)
+        print('Monies have been saved to your bank account\n'
+        'Please use .reload to refresh data')
+    def saveFixedBalanceToBank(self):
+        f_bal_str = self.userInput.split(' ',1)[1]
+        try:
+            f_bal_int = int(f_bal_str)
+            self.b.setAccountBalance(f_bal_int)
+            print('succesfully set {0} as new account balance'.format(f_bal_int))
+        except ValueError as e:
+            print('There has been the {0} error.\n'
+            '.set needs int as parameter'.format(e))
     def quit(self):
         print('Ciao\n')
         exit(0)
