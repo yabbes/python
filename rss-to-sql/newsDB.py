@@ -13,4 +13,5 @@ class NewsDB:
         except lite.Error as e:
             print(e)
             sys.exit(1)
-        
+    def closeConnection(self):
+        self.con.close()
