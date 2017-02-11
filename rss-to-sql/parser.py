@@ -17,7 +17,7 @@ class Parser:
     def parseFAZ(self):
         for item in self.xml.findAll('item'):
             infoItem = {}
-            infoItem['title'] = item.find('title')
+            infoItem['title'] = item.find('title').__str__()
             try:
                 infoItem['date'] = item.find('pubDate')
             except Exception as e:
