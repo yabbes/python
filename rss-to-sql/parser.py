@@ -17,12 +17,12 @@ class Parser:
     def parseFAZ(self):
         for item in self.xml.findAll('item'):
             infoItem = {}
-            infoItem['title'] = item.find('title').__str__()
+            infoItem['title'] = str(item.find('title'))
             try:
-                infoItem['date'] = item.find('pubDate')
+                infoItem['date'] = str(item.find('pubDate'))
             except Exception as e:
                 infoItem['date'] = 'nA'
-            infoItem['link'] = item.find('link')
+            infoItem['link'] = str(item.find('link'))
             self.articles.append(infoItem)
         return self.articles
 
