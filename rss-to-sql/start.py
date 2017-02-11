@@ -7,11 +7,18 @@ def main():
     n = NewsDB()
     n.cur.execute('Select SQLITE_VERSION()')
     data = n.cur.fetchone()
-
-    print(data)
     p = Parser()
     articles = p.parseFAZ()
-    print(articles)
+
+
+    for item in articles:
+        # print(type(item['title']))
+        n.cur.execute('INSERT INTO News (title, link, date) VALUES(?,?,?)', ('test', 'test', 'date'))
+    # being a good guy, closing the connection
+    n.con.commit()
+    n.closeConnection()
+
+
 
 
 if __name__ == '__main__':
