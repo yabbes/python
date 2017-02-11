@@ -10,10 +10,13 @@ def main():
     p = Parser()
     articles = p.parseFAZ()
 
+    liste = []
 
     for item in articles:
-        # print(type(item['title']))
-        n.cur.execute('INSERT INTO News (title, link, date) VALUES(?,?,?)', ('test', 'test', 'date'))
+        a = (item['title'], item['link'], item['date'])
+        liste.append(a)
+        # n.cur.execute('INSERT INTO News (title, link, date) VALUES(?,?,?)', ('test', 'test', 'date'))
+    n.cur.executemany('INSERT INTO News (title, link, date) VALUES(?,?,?)', liste)
     # being a good guy, closing the connection
     n.con.commit()
     n.closeConnection()
