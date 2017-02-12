@@ -3,7 +3,7 @@
 
 import urllib.request
 from bs4 import BeautifulSoup
-import sqlite3
+
 
 class Parser:
     url = 'http://www.faz.net/rss/aktuell/'
@@ -11,6 +11,7 @@ class Parser:
     data = req.read()
     xml = BeautifulSoup(data, features="xml")
     articles = []
+
     def __init__(self):
         pass
 
@@ -25,7 +26,6 @@ class Parser:
             infoItem['link'] = str(item.find('link'))
             self.articles.append(infoItem)
         return self.articles
-
 
 
 # f = open('news.json', 'wb')
