@@ -7,26 +7,26 @@ from bs4 import BeautifulSoup
 import sys
 
 
-
 def main(word):
     url = 'http://www.duden.de/suchen/dudenonline/'+word
-    headers={}
+    headers = {}
     headers['User-Agent'] = "Mozilla/5.0 (X11; Linux i686)"
     req = urllib.request.Request(url, headers=headers)
     req_open = urllib.request.urlopen(req)
     data = req_open.read()
     parse(data)
 
+
 def parse(data):
     soup = BeautifulSoup(data, 'lxml')
-    firstResult_filter = {"id":"block-duden-tiles-0"}
+    firstResult_filter = {"id": "block-duden-tiles-0"}
     firstResult = soup.find('section', firstResult_filter)
     # for later tries, getting description text as well maybe
     # sections = firstResult.findAll('section', {"class":"wide"})
     # for item in sections:
     #     print('{0}'.format(item.next_sibling()))
 
-    firstResult_headers = firstResult.findAll('a', {"class":"hidden-link"})
+    firstResult_headers = firstResult.findAll('a', {"class": "hidden-link"})
 
     for item in firstResult_headers:
         print('{0}'.format(item.text))
@@ -38,7 +38,6 @@ def parse(data):
     # f.close()
 
 
-
 if __name__ == '__main__':
     if len(sys.argv) > 1:
         word = sys.argv[1]
@@ -48,7 +47,11 @@ if __name__ == '__main__':
             # because duden.de does not handle httprequests for words
             # that don't exist, we can simply conclude the following
             # at least for our purposes it will be just fine
-            print('This word either does not exist or is not spelled correctly\n')
+            print(
+                  'This word either does not exist'
+                  'or is not spelled correctly \n'
+                  )
     else:
-        print("Please enter the word for lookup as parameter\n"
-        "Correct syntax : ./duden.py ##word##\n")
+        print(
+            "Please enter the word for lookup as parameter\n"
+            "Correct syntax : ./duden.py ##word##\n")
