@@ -1,11 +1,12 @@
 #!/bin/env python3
-##hangman project
+# hangman project
 
 import urllib.request
 import random
 from bs4 import BeautifulSoup
 
-##prerequisites; building the database, reading some Maupassant
+
+# prerequisites; building the database, reading some Maupassant
 source = 'http://maupassant.free.fr/textes/solitude.html'
 open = urllib.request.urlopen(source)
 open_str = open.read().decode('utf-8')
@@ -13,12 +14,30 @@ soup = BeautifulSoup(open_str, "html.parser")
 results = soup.get_text()
 words = str.split(results)
 filtered_db = list(filter(lambda x: len(x) >= 3, words))
-## Now I have my word database, return exactly one word that is at least 3
-## chars long, this will be our hangmanWord
+# Now I have my word database, return exactly one word that is at least 3
+# chars long, this will be our hangmanWord
+# w = open('output.html', 'w')
+# w.write(open_str)
+# exit()
+
+unwantedWords = ['HTML']
 hangmanWord = str.upper(random.choice(filtered_db))
+
+if hangmanWord in unwantedWords:
+    print('Word not accepted, please reload script')
+    exit()
+
+
+# removing garbage like ',' ' ' '?' '!'
+for c in hangmanWord:
+    if c in ' ,?.!/;:':
+        hangmanWord.replace(c, '')
+
+
 word_guessed = []
 for w in hangmanWord:
     word_guessed.append("_")
+
 
 def gameLoop():
     guessed = []
@@ -41,14 +60,18 @@ def gameLoop():
         if checkIfComplete() is True:
             print("Congratulations, you've found the word\n")
             break
-        ##print("debug info {0}".format(hangmanWord))
+        # print("debug info {0}".format(hangmanWord))
+
 
 def main():
     print("Welcome to Hangman à la Maupassant\n"
-    "I found the word, now it's your turn to guess it\n"
-    "Good Luck")
-    print("The word you are looking for is {0} characters long".format(len(hangmanWord)))
+          "I found the word, now it's your turn to guess it\n"
+          "Good Luck")
+    print(
+          "The word you are looking for is {0} characters long".
+          format(len(hangmanWord)))
     gameLoop()
+
 
 def checkIfComplete():
     summe = 0
@@ -59,6 +82,7 @@ def checkIfComplete():
         return False
     else:
         return True
+
 
 if __name__ == '__main__':
     main()
