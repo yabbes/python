@@ -5,3 +5,4 @@ duden/duden.html
 *.pyc
 image.py
 foot/large.jpg.png
+*.old
