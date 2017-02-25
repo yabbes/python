@@ -4,7 +4,8 @@ Some .py practice
 
 
 
-futs : [![asciicast](https://asciinema.org/a/64syx7lyh3nahoji4ft7b30tn.png)](https://asciinema.org/a/64syx7lyh3nahoji4ft7b30tn)
+futs : display european football league tables via football-data.org REST API
+<img src="foot/futs.gif">
 
 duden : little script to check spelling of words with the duden.de database
 <img src="duden.py.gif">
