@@ -14,7 +14,10 @@ fr_source = 'http://api.football-data.org/v1/soccerseasons/434/leagueTable'
 
 
 def main():
-    print('Willkommen bei Futs dem Fußball-Tsentrum\n')
+    willkommen = '* Willkommen bei Futs dem Fußball-Tsentrum *'
+    print('*' * len(willkommen))
+    print(willkommen)
+    print('*' * len(willkommen))
     print('Folgende Tabellen stehen zur Auswahl: \n\n'
           'en\t -> Premiere League\n'
           'de\t -> Bundesliga\n'
