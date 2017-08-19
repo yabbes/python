@@ -27,7 +27,7 @@ class Botzentrum:
 
 
 def main():
-    bot = Botzentrum('irc.freenode.net', '##tobbowobbo')
+    bot = Botzentrum('irc.freenode.net', '##francophonie')
     bot.connect()
 
     while True:
