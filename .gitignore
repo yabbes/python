@@ -1,4 +1,5 @@
 botten.py
+*.swp
 combo.py
 duden/duden.html
 *pycache*
