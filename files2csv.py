@@ -4,6 +4,7 @@
 import os, csv, sys
 import docx
 import math
+import codecs
 
 if len(sys.argv) <= 1:
     print("Please provide [1]folder location and [2]output-file.csv")
@@ -29,7 +30,7 @@ def getDocxSummary(file):
     else:
         return ftext
 
-with open(sys.argv[2],'w') as f:        
+with open(sys.argv[2],'w', encoding='utf-8') as f:        
     w = csv.writer(f, delimiter=",")
     w.writerow(['file', 'complete path', 'file extension', 'file size', 'content-summary'])
     for path, dirs, files in os.walk(sys.argv[1]):
