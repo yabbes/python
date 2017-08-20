@@ -42,15 +42,14 @@ with open(sys.argv[2],'w', encoding='utf-8') as f:
             content_summary = ''
             if fext == '.docx' or fext == '.doc':
                 content_summary = getDocxSummary(os.path.join(path, filename))
-            
+
             fsize = convertFileSize(os.path.getsize(os.path.join(path, filename)))
 
-            w.writerow([filename, os.path.join(path, filename), fext, fsize, content_summary])
-            print(path + '/' + filename)
+            try:
+                w.writerow([filename, os.path.join(path, filename), fext, fsize, content_summary])
+                print(path + '/' + filename)
+            except UnicodeEncodeError:
+                w.writerow(['UnicodeEncodeError'])
 
 
 
-        
-        
-
-    
