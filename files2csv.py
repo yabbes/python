@@ -5,9 +5,12 @@ import os, csv, sys
 import docx
 import math
 import codecs
+import datetime
+
+wanted = ['.docx', '.doc', '.pdf', '.DOC', '.PDF', '.DOCX', '.txt', '.TXT', '.pub', '.xls', '.xlsx']
 
 if len(sys.argv) <= 1:
-    print("Please provide [1]folder location and [2]output-file.csv")
+    print("Please provide [1]folder location and [2]output file.csv")
     sys.exit(-1)
     
 def convertFileSize(size_bytes):
@@ -20,36 +23,44 @@ def convertFileSize(size_bytes):
     return "%s %s" % (s, size_name[i])
 
 def getDocxSummary(file):
-    doc = docx.Document(file)
-    ftext = ''
-    for p in doc.paragraphs:
-        for run in p.runs:
-            ftext += run.text
-    if len(ftext) > 30:
-        return ftext[0:30]
-    else:
-        return ftext
+    try:
+        doc = docx.Document(file)
+        ftext = ''
+        for p in doc.paragraphs:
+            for run in p.runs:
+                ftext += run.text
+        if len(ftext) > 200:
+            return ftext[0:200]
+        else:
+            return ftext
+    except:
+        return ''
+            
 
-with open(sys.argv[2],'w', encoding='utf-8') as f:        
+with open(sys.argv[2],'w', encoding='utf-8', newline='') as f:        
     w = csv.writer(f, delimiter=",")
-    w.writerow(['file', 'complete path', 'file extension', 'file size', 'content-summary'])
+    w.writerow(['file', 'complete path', 'file extension', 'file size', 'content-summary', 'last modified'])
     for path, dirs, files in os.walk(sys.argv[1]):
         print(dirs)
         for filename in files:
             fn, fext = os.path.splitext(filename)
 
+            if fext not in wanted:
+                continue
             # check if summary can be provided for some file extensions
             content_summary = ''
             if fext == '.docx' or fext == '.doc':
                 content_summary = getDocxSummary(os.path.join(path, filename))
 
             fsize = convertFileSize(os.path.getsize(os.path.join(path, filename)))
+            ftimestamp = datetime.datetime.fromtimestamp(os.path.getmtime(os.path.join(path, filename)))
 
             try:
-                w.writerow([filename, os.path.join(path, filename), fext, fsize, content_summary])
+                w.writerow([filename, os.path.join(path, filename), fext, fsize, content_summary, ftimestamp])
                 print(path + '/' + filename)
             except UnicodeEncodeError:
-                w.writerow(['UnicodeEncodeError'])
+                # w.writerow(['UnicodeEncodeError'])
+                print('UnicodeError')
 
 
 
