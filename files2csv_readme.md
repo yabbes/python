@@ -1,6 +1,6 @@
 ## Automatized file cataloguing with Python
 
-I wrote a script with Python to create a catalogue of all files in a given directory in the csv format.
+I wrote a [script](https://github.com/yabbes/python/blob/master/files2csv.py) with Python to create a catalogue of all files in a given directory in the csv format.
 
 ### Automated parsing of doc / docx files
 Other than just list the file contents, I wanted the script also to automatically give me a brief idea of what the contained Word documents were about. To achieve this I used the **python-docx** module.
