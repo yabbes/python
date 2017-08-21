@@ -6,7 +6,7 @@ I wrote a script with Python to create a catalogue of all files in a given direc
 Other than just list the file contents, I wanted the script also to automatically give me a brief idea of what the contained Word documents were about. To achieve this I used the **python-docx** module.
 
 So whenever I would find a file with a Word file extension, I would handle it like so:
-```
+```python
 def getDocxSummary(file):
     try:
         doc = docx.Document(file)
@@ -30,14 +30,14 @@ Obviously the script could be enhanced to handle text files the same way or mayb
 ### Creating the csv
 Creating a new output.csv file is simple in Python
 
-```
+```python
 with open(sys.argv[2],'w', encoding='utf-8', newline='') as f:        
     w = csv.writer(f, delimiter=",")
     w.writerow(['file', 'complete path', 'file extension', 'file size', 'content-summary', 'last modified'])
 
 ```
 And then I would collect the necessary information and put it in a new row like so:
-```
+```python
 try:
 	w.writerow([filename, os.path.join(path, filename), fext, fsize, content_summary, ftimestamp])
 	print(path + '/' + filename)
@@ -52,7 +52,7 @@ On top of that the csv module of Python has historically (in Python2) had issues
 ### Filtering file extensions
 Because the folder I wanted to catalogize had a huge number of irrelevant files, I used this simple filter inside the loop through ```paths, dirs, files``` of the  ```os.walk()``` method
 
-```
+```python
 wanted = ['.docx', '.doc', '.pdf', '.DOC', '.PDF', '.DOCX', '.txt', '.TXT', '.pub', '.xls', '.xlsx']
 
 # fext = file extension
