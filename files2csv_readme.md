@@ -1,4 +1,4 @@
-## Automatized file export with Python
+## Automatized file cataloguing with Python
 
 I wrote a script with Python to create a catalogue of all files in a given directory in the csv format.
 
