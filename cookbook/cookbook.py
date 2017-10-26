@@ -8,3 +8,11 @@ def count_code(s):
 
 # normal way of counting occurences of substring sx in string s
 s.count(sx)
+
+
+# looping with indexes in python
+# example to emulate C style loop with running index i
+i = 0
+while i < len(array):
+    print(array[i])
+    i += 1
