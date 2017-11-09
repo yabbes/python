@@ -16,3 +16,11 @@ i = 0
 while i < len(array):
     print(array[i])
     i += 1
+
+# calculate the number of days between two dates
+from datetime import date
+
+d0 = date(2008, 8, 18)
+d1 = date(2008, 9, 26)
+delta = d0 - d1
+print(delta.days)
