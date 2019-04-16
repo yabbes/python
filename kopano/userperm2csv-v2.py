@@ -26,7 +26,7 @@ with open('output.csv','w') as f:
                 try:
                     w.writerow (['Ordnerberechtigungen von Benutzer', str(u.name), '', '', str(f.path)])
                 except UnicodeEncodeError:
-                    "unicode error"
+                    print "unicode error"
 
                 try:
                     w.writerow (['Berechtigung', str(u.name), str(fp.member.name), fp.rights, f.path])
