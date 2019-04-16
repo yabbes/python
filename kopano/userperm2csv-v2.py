@@ -1,34 +1,35 @@
 #!/usr/bin/env python
-# Sorry this is lazy Python2 code but it did serve its purpose
+# -*- coding: utf-8 -*-
 
 import kopano
 import csv
 
-k = kopano.Server(auth_user='username',auth_pass='password', server_socket='http://zarafaserver:236/zarafa')
+k = kopano.Server(auth_user='user',auth_pass='pass', server_socket='http://zarafaserver.de:236/zarafa')
 
 with open('output.csv','w') as f:        
     w = csv.writer(f, delimiter=",")
-    w.writerow(['', 'User', 'Folder','Permissions'])
+    w.writerow(['Beschreibung', 'Besitzer', 'Rechteinhaber','Berechtigungen', 'Ordnername'])
     for u in k.users(): 
         print u.name
         for p in u.store.permissions():
             try:
-                w.writerow(['Store Permissions for: ', str(u.name).encode('utf-8'), '', ''])
+                w.writerow(['Userstore von Benutzer: ', str(u.name), '', '', ''])
             except UnicodeEncodeError:
                 print "unicode error"
             try:
-                w.writerow(['', str(p.member.name).encode('utf-8'), 'userstore', p.rights])
+                w.writerow(['Berechtigung', str(u.name), str(p.member.name), p.rights, 'Userstore'])
             except UnicodeEncodeError:
                 print "unicode error"
 
         for f in u.store.folders():
             for fp in f.permissions():
                 try:
-                    w.writerow (['Listing', str(u.name).encode('utf-8'), 'Folder: ' + str(f.path).encode('utf-8'), ':'])
+                    w.writerow (['Ordnerberechtigungen von Benutzer', str(u.name), '', '', str(f.path)])
                 except UnicodeEncodeError:
                     "unicode error"
+
                 try:
-                     w.writerow (['', str(fp.member.name).encode('utf-8'), str(f.path).encode('utf-8'), fp.rights])
+                    w.writerow (['Berechtigung', str(u.name), str(fp.member.name), fp.rights, f.path])
                 except UnicodeEncodeError:
                     print "unicode error"
 
